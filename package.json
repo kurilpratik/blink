@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "Pratik Kuril",
   "license": "ISC",
-  "description": "",
+  "description": "Full stack URL shortener with analytics dashboard",
   "type": "module",
   "dependencies": {
     "bcryptjs": "^3.0.2",
