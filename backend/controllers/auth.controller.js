@@ -2,6 +2,7 @@
 // Skipping encrypting of password because it is hardcoded in the db at the mooment
 
 import User from "../models/user.model.js";
+import { generateTokenAndSetCookie } from "../lib/utils/generateToken.js";
 
 export const login = async (req, res) => {
     try {
@@ -10,12 +11,14 @@ export const login = async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: "User not found" });
         }
-        if (!isPasswordCorrect) {
+        if (password != user.password) {
             return res.status(400).json({ error: "Incorrect Password" });
         }
         // On Success
+        generateTokenAndSetCookie(user.email, res);
         res.status(200).json({
             email: user.email,
+            //password: user.password, Don't want to send password to the client
             urls: user.urls,
         });
     } catch (error) {

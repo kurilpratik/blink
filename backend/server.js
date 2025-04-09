@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json()); // To parse req.body
+app.use(express.urlencoded({ extended: true }));
 
 // Method to test by logging any route that is hit
 app.use((req, res, next) => {
