@@ -1,23 +1,21 @@
 import "./App.css";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { BrowserRouter, Routes, Route } from "react-router";
+import Landing from "./pages/landing";
+import Auth from "./pages/auth";
+import Dashboard from "./pages/dashboard";
 
 function App() {
     return (
-        <div className="font-extrabold">
-            Home - Blink
-            <div className="h-8 w-28 bg-amber-100"></div>
-            <Button variant="outline" size={"lg"}>
-                Click
-            </Button>
-            <Avatar>
-                <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-        </div>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     );
 }
 
