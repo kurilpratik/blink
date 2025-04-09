@@ -8,6 +8,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(express.json()); // To parse req.body
+
 // Method to test by logging any route that is hit
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
