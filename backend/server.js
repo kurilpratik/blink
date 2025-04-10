@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import authRoutes from "./routes/auth.routes.js";
 import connectMongoDB from "./db/connectMongoDb.js";
@@ -10,6 +11,12 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json()); // To parse req.body
 app.use(express.urlencoded({ extended: true }));
+app.use(
+    cors({
+        origin: "http://localhost:5173", // Allow requests from this origin
+        credentials: true, // Allow cookies to be sent with requestss
+    })
+);
 
 // Method to test by logging any route that is hit
 app.use((req, res, next) => {

@@ -3,14 +3,7 @@ import { Link } from "react-router";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Link2, Calendar } from "lucide-react";
 
 function Landing() {
@@ -152,7 +145,7 @@ function Landing() {
                             <h3 className="font-bold">QR Code</h3>
                             <Button variant={"outline"}>Download PNG</Button>
                         </CardHeader>
-                        <CardDescription className={"px-6 inline-flex gap-4"}>
+                        <CardContent className={"px-6 inline-flex gap-4"}>
                             <img
                                 src="/qr.png"
                                 alt="qr code"
@@ -172,7 +165,7 @@ function Landing() {
                                     </span>
                                 </Link>
                             </div>
-                        </CardDescription>
+                        </CardContent>
                     </Card>
                 </div>
             </div>
