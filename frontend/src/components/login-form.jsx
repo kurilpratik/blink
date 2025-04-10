@@ -12,6 +12,8 @@ import { Label } from "@/components/ui/label";
 import Error from "./error";
 import { useState } from "react";
 import { set } from "mongoose";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 export function LoginForm({ className, ...props }) {
     const [formData, setFormData] = useState({
@@ -20,6 +22,7 @@ export function LoginForm({ className, ...props }) {
     });
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -33,7 +36,7 @@ export function LoginForm({ className, ...props }) {
         setErrors([]);
         try {
             setIsLoading(true);
-            console.log(formData);
+            // console.log(formData);
             const response = await fetch(
                 "http://localhost:5000/api/auth/login",
                 {
@@ -47,13 +50,16 @@ export function LoginForm({ className, ...props }) {
             );
 
             const data = await response.json();
-            console.log("Response data:", data);
+            // console.log("Response data:", data);
 
             if (!response.ok) {
-                setErrors([data.error]);
+                toast.error(data.error);
+                // setErrors([data.error]);
                 return;
             } else {
                 console.log("Login successful:", data);
+                // toast.success("Login successful");
+                navigate("/dashboard");
                 return data;
             }
             // if (data.error) {
@@ -61,7 +67,6 @@ export function LoginForm({ className, ...props }) {
             // }
         } catch (error) {
             console.error("Error during login:", error);
-            setErrors([error.message]);
             setIsLoading(false);
         } finally {
             setIsLoading(false);

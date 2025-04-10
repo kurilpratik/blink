@@ -5,6 +5,8 @@ import Landing from "./pages/landing";
 import Auth from "./pages/auth";
 import Dashboard from "./pages/dashboard";
 
+import { Toaster } from "react-hot-toast";
+
 function App() {
     return (
         <>
@@ -15,6 +17,7 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard />} />
                 </Routes>
             </BrowserRouter>
+            <Toaster />
         </>
     );
 }
