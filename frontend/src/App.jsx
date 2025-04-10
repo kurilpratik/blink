@@ -7,17 +7,29 @@ import Dashboard from "./pages/dashboard";
 
 import { Toaster } from "react-hot-toast";
 
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./context/protected-route";
+
 function App() {
     return (
         <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Landing />} />
-                    <Route path="/auth" element={<Auth />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                </Routes>
-            </BrowserRouter>
-            <Toaster />
+            <AuthProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Landing />} />
+                        <Route path="/auth" element={<Auth />} />
+                        <Route
+                            path="/dashboard"
+                            element={
+                                <ProtectedRoute>
+                                    <Dashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+                    </Routes>
+                </BrowserRouter>
+                <Toaster />
+            </AuthProvider>
         </>
     );
 }

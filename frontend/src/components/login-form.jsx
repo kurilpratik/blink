@@ -14,8 +14,10 @@ import { useState } from "react";
 import { set } from "mongoose";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 export function LoginForm({ className, ...props }) {
+    const { fetchUser } = useAuth();
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -59,12 +61,10 @@ export function LoginForm({ className, ...props }) {
             } else {
                 console.log("Login successful:", data);
                 // toast.success("Login successful");
+                await fetchUser(); // Fetch user data after login
                 navigate("/dashboard");
-                return data;
+                // return data;
             }
-            // if (data.error) {
-            //     setErrors([data.error]);
-            // }
         } catch (error) {
             console.error("Error during login:", error);
             setIsLoading(false);
