@@ -44,7 +44,7 @@ export function LoginForm({ className, ...props }) {
                     headers: {
                         "content-type": "application/json",
                     },
-                    // credentials: "include", // <- important for cookies/session
+                    credentials: "include", // <- important for cookies/session
                     body: JSON.stringify(formData),
                 }
             );
