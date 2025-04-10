@@ -3,6 +3,7 @@
 
 import User from "../models/user.model.js";
 import { generateTokenAndSetCookie } from "../lib/utils/generateToken.js";
+import jwt from "jsonwebtoken";
 
 export const login = async (req, res) => {
     try {
@@ -34,5 +35,43 @@ export const logout = async (req, res) => {
     } catch (error) {
         console.log("Error in logout controller : ", error.message);
         res.status(500).json({ error: "Internal server error " });
+    }
+};
+
+export const getMe = async (req, res) => {
+    // try {
+    //     const user = await User.findById(req.User._id).select("-password");
+    //     res.status(200).json(user);
+    // } catch (error) {
+    //     console.log("Error in getMe controller : ", error.message);
+    //     res.status(500).json({ error: "Internal server error " });
+    // }
+    try {
+        const token = req.cookies.jwt;
+        if (!token) {
+            return res.status(401).json({
+                error: "Unauthorized: No token found. try loogin in first.",
+            });
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (!decoded) {
+            return res
+                .status(401)
+                .json({ error: "Unauthorized: Invalid token." });
+        }
+
+        const user = await User.findOne({ email: decoded.email }).select(
+            "-password"
+        );
+        if (!user) {
+            return res
+                .status(401)
+                .json({ error: "Unauthorized: User not found." });
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        console.error("Error in getMe:", error.message);
+        res.status(500).json({ error: "Internal server error" });
     }
 };

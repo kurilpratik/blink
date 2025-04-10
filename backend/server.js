@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.routes.js";
 import connectMongoDB from "./db/connectMongoDb.js";
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json()); // To parse req.body
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); // Parse cookies
 app.use(
     cors({
         origin: "http://localhost:5173", // Allow requests from this origin
