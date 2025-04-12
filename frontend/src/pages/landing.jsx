@@ -5,15 +5,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Link2, Calendar } from "lucide-react";
+import Logo from "@/components/logo";
 
 function Landing() {
     return (
         <div className="container">
             {/* NAVBAR  */}
             <nav className="flex justify-between items-center py-4">
-                <Link className="flex items-center gap-2" to="/">
-                    <img src="/logo.svg" alt="logo" className="w-8 h-8" />
-                    <h1 className="font-bold text-2xl italic">Blink</h1>
+                <Link to={"/"}>
+                    <Logo />
                 </Link>
                 <ul className="flex gap-6 font-semibold">
                     <li className="bg-blue-50 px-4 py-2 rounded-md text-blue-600">
